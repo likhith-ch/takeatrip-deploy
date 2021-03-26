@@ -1,0 +1,146 @@
+<div class="container w-75 color-change-2x">
+    <form #usersignup = "ngForm" (ngSubmit) = "onClickSubmit(usersignup.value)">
+        <div class="mb-3">
+            <h4 style="color:#ffffff">Choose Activity</h4>
+        
+        <div class="form-check form-check-inline" style="color:#faf9f2">
+            <input class="form-check-input" type="radio" name="activitytype" value="create" required ngModel>Create New
+          </div>
+          <div class="form-check form-check-inline" style="color:#f7f6f3">
+            <input class="form-check-input" type="radio" name="activitytype" value="modify" required ngModel>Update Existing
+          </div>
+
+        </div>
+        <div class="mb-3">
+            <h4 style="color:#ffffff">Choose Service Type</h4>
+            <div class="form-check form-check-inline text-center" style="color:#fdfdfc">
+                <input class="form-check-input" type="radio" name="servicetype" value="hotel" required ngModel>Hotel
+              </div>
+              <div class="form-check form-check-inline text-center" style="color:#fcfbf7">
+                <input class="form-check-input" type="radio" name="servicetype" value="holiday" required ngModel>Holiday Package
+              </div>
+            </div>
+
+            <div class="mt-5 text-center text-white" *ngIf="usersignup.value.servicetype=='' || usersignup.value.activitytype==''"><h5 class="tracking-in-expand">Please choose both activity and service types to proceed</h5></div>
+
+
+        <div *ngIf="usersignup.value.servicetype=='holiday' && usersignup.value.activitytype=='create'" style="border: 3px solid #0c4261;" class="p-3">
+          <div class="mb-3 text-center">
+            <h5 class="tracking-in-expand text-white">Add a Holiday Package</h5>
+          </div>
+    <div class="mb-3">
+            <input type="text" class="form-control" id="packageid" placeholder="Enter Holiday Package  Id" name="packageid" required ngModel>
+          </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="packagename" placeholder="Enter Holiday Package name" name="packagename" ngModel>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="packagedestcity" placeholder="Enter Holiday Package Destination City" name="packagecity" ngModel>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="packageprice" placeholder="Enter Holiday Package price" name="packageprice" ngModel>
+      </div>
+      <div class="mb-3">
+        <input type="number" class="form-control" id="packagenights" placeholder="Enter Holiday Package Duration in Nights" name="packagenights" ngModel>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="packagefacilites" placeholder="Enter WHat Holiday Package Includes(coma Seperated)" name="packagefeatures" ngModel>
+      </div>
+      <div class="mb-3">
+        <input type="file" class="formcontrol" (change)='incomingfile($event)' name="image" accept='image/*' placeholder="Upload Product Image" >
+      </div>
+     
+      <div class="text-center">
+      <button type="submit" class="btn btn-default btn-primary " style="background-color:#0c4261">Submit</button>
+    </div>
+</div>
+
+
+
+    <div *ngIf="usersignup.value.servicetype=='hotel' && usersignup.value.activitytype=='create'" style="border: 3px solid #0c4261;" class="p-3">
+      <div class="mb-3 text-center">
+        <h5 class="tracking-in-expand text-white">Add a hotel</h5>
+      </div>
+        <div class="mb-3">
+                <input type="text" class="form-control" id="hotelid" placeholder="Enter Hotel Id" name="hotelid" required ngModel>
+              </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="hotelname" placeholder="Enter Hotel name" name="hotelname" ngModel>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="hotelcity" placeholder="Enter Hotel Location City" name="hotelcity" ngModel>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="hotelprice" placeholder="Enter Room price per night" name="hotelprice" ngModel>
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" id="hotelcapacity" placeholder="Enter Number of rooms in hotel" name="hotelrooms" ngModel>
+          </div>
+          <div class="mb-3">
+            <input type="file" class="formcontrol" (change)='incomingfile($event)' name="image" accept='image/*' placeholder="Upload Product Image" >
+          </div>
+         
+          <div class="text-center">
+          <button type="submit" class="btn btn-default btn-primary" style="background-color:#0c4261">Submit</button>
+        </div></div>
+    
+
+
+
+    <div *ngIf="usersignup.value.servicetype=='holiday' && usersignup.value.activitytype=='modify'" style="border: 3px solid #0c4261;" class="p-3">
+      <div class="mb-3 text-center">
+        <h5 class="tracking-in-expand text-white">Update Holiday Package</h5>
+      </div>
+        <div class="mb-3">
+                <input type="text" class="form-control" id="packageid" placeholder="Enter Holiday Package  Id" name="packageid" required ngModel>
+              </div>
+          
+         
+          <div class="mb-3">
+            <input type="text" class="form-control" id="packageprice" placeholder="Enter Holiday Package price" name="packageprice" ngModel>
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" id="packagenights" placeholder="Enter Holiday Package Duration in Nights" name="packagenights" ngModel>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="packagefacilites" placeholder="Enter WHat Holiday Package Includes(coma Seperated)" name="packagefeatures" ngModel>
+          </div>
+          <div class="mb-3 text-center">
+            <p class="text-white"><span style="color:red">*</span> You can update single or multiple details at a time</p>
+          </div>
+          <div class="text-center mb-5">
+          <button type="submit" class="btn btn-default btn-primary" style="background-color:#0c4261">Submit</button>
+        </div>
+      </div>
+
+
+
+
+        <div *ngIf="usersignup.value.servicetype=='hotel' && usersignup.value.activitytype=='modify'" style="border: 3px solid #0c4261;" class="p-3">
+          <div class="mb-3 text-center">
+            <h5 class="tracking-in-expand text-white">Update Hotel</h5>
+          </div>
+            <div class="mb-3">
+                    <input type="text" class="form-control" id="hotelid" placeholder="Enter Hotel Id" name="hotelid" required ngModel>
+                  </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="hotelname" placeholder="Enter Hotel name" name="hotelname" ngModel>
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="hotelprice" placeholder="Enter Room price per night" name="hotelprice" ngModel>
+              </div>
+              <div class="mb-3">
+                <input type="number" class="form-control" id="hotelcapacity" placeholder="Enter Number of rooms in hotel" name="hotelrooms" ngModel>
+              </div>
+              <div class="mb-3 text-center">
+                <p class="text-white"><span style="color:red">*</span> You can update single or multiple details at a time.</p>
+              </div>
+              <div class="text-center mb-5">
+              <button type="submit" class="btn btn-default btn-primary" style="background-color:#0c4261">Submit</button>
+            </div>
+            
+        </div>
+    
+    </form>
+    
+  </div>
