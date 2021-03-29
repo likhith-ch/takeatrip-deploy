@@ -13,4 +13,10 @@ return this.hc.post("hotels/createhotel",data)
   updatehotel(data:any):Observable<any>{
     return this.hc.post("hotels/updatehotel",data)
       }
+      viewhotels():Observable<any>{
+        return this.hc.get("hotels/gethotels")
+          }
+          deletehotel(data:any):Observable<any>{
+            return this.hc.delete("hotels/deletehotel/"+data)
+          }
 }

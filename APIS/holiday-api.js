@@ -52,7 +52,7 @@ let dobj=req.body
 })
 
 
-holidaysapiObj.get("/getproducts",errHandler(async (req,res)=>{
+holidaysapiObj.get("/getpackages",errHandler(async (req,res)=>{
     let holidayObj= await Holiday.find()
     res.send({message:holidayObj})
 }))
@@ -70,9 +70,6 @@ holidaysapiObj.post("/updatepackage",errHandler(async (req,res)=>{
     let dobj=req.body
     let updateddata={}
     console.log("Call reached service")
-    if(dobj.packagename!=""){
-updateddata["package_name"]=dobj.packagename
-    }
     if(dobj.packagenights!=""){
         updateddata["package_nights"]=dobj.packagenights
     }
@@ -88,7 +85,8 @@ updateddata["package_name"]=dobj.packagename
 }))
 
 
-/*holidaysapiObj.delete("/deleteproduct/:productId",errHandler(async (req,res)=>{
-    await Product.deleteOne({productId:parseInt(req.params.productId)})
-    res.send({message:"Product deleted successfully"})
-}))*/
+holidaysapiObj.delete("/deletepackage/:package_id",errHandler(async (req,res)=>{
+    console.log("hello")
+    await Holiday.deleteOne({package_id:req.params.package_id})
+    res.send({message:"Package deleted successfully"})
+}))

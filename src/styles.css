@@ -7,3 +7,10 @@
 @keyframes color-change-2x{0%{background:rgb(3, 18, 31)}100%{background:rgb(10, 73, 128)}}
 
  @keyframes tracking-in-expand{0%{letter-spacing:-.5em;opacity:0}40%{opacity:.6}100%{opacity:1}}
+
+ .imgcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

@@ -6,10 +6,14 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

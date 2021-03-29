@@ -52,7 +52,7 @@ let dobj=req.body
 })
 
 
-hotelsapiObj.get("/getproducts",errHandler(async (req,res)=>{
+hotelsapiObj.get("/gethotels",errHandler(async (req,res)=>{
     let hotelObj= await Hotel.find()
     res.send({message:hotelObj})
 }))
@@ -72,7 +72,7 @@ hotelsapiObj.post("/updatehotel",errHandler(async (req,res)=>{
     if(dobj.hotelname!=""){
         updateddata["hotel_name"]=dobj.hotelname
     }
-    if(dobj.hotelrooms!=""){
+    if(dobj.hotelrooms!="" && dobj.hotelrooms!=null){
     updateddata["hotel_rooms_count"]=dobj.hotelrooms
     }
     if(dobj.hotelprice!=""){
@@ -84,7 +84,7 @@ hotelsapiObj.post("/updatehotel",errHandler(async (req,res)=>{
 }))
 
 
-/*hotelsapiObj.delete("/deleteproduct/:productId",errHandler(async (req,res)=>{
-    await Product.deleteOne({productId:parseInt(req.params.productId)})
-    res.send({message:"Product deleted successfully"})
-}))*/
+hotelsapiObj.delete("/deletehotel/:hotel_id",errHandler(async (req,res)=>{
+    await Hotel.deleteOne({hotel_id:req.params.hotel_id})
+    res.send({message:"Hotel deleted successfully"})
+}))

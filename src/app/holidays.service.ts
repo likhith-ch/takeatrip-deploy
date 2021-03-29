@@ -12,7 +12,13 @@ export class HolidaysService {
     return this.hc.post("holiday/createpackage",data)
       }
       updatepackage(data:any):Observable<any>{
-        console.log("Call reached function")
         return this.hc.post("holiday/updatepackage",data)
           }
+          viewpackages():Observable<any>{
+            return this.hc.get("holiday/getpackages")
+              }
+              deletepackage(data:any):Observable<any>{
+                console.log("/deletepackage/"+data)
+                return this.hc.delete("holiday/deletepackage/"+data)
+              }
 }

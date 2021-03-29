@@ -9,6 +9,16 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit,OnDestroy {
+  actiontype="view";
+  servicetype="holiday"
+  packlen:any
+  packageitems:any;
+  hotlen:any
+  hotelitems:any
+  viewbtncolor="linear-gradient(to right,#f0772c,#f95776)"
+addbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
+holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
+hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
   constructor(private packobj:HolidaysService,private hotobj:HotelsService,private router:Router) { }
   formdata=new FormData();
   file:any;
@@ -18,9 +28,56 @@ export class AdminComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
+    this.packobj.viewpackages().subscribe(res=>{
+      this.packageitems=res["message"]
+      this.packlen=this.packageitems.length
+    })
   }
   ngOnDestroy():void{
   }
+  changactiontype(data:any){
+    if(data=="view")
+    {
+      this.addbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
+this.viewbtncolor="linear-gradient(to right,#f0772c,#f95776)"
+this.actiontype="view"
+    }
+    if(data=="add"){
+      this.addbtncolor="linear-gradient(to right,#f0772c,#f95776)"
+this.viewbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
+this.actiontype="add"
+    }
+  }
+
+  changeservicetype(data:any){
+    if(data=="holiday")
+    {
+      this.hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
+this.holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
+this.servicetype="holiday"
+this.packobj.viewpackages().subscribe(res=>{
+  this.packageitems=res["message"]
+  this.packlen=this.packageitems.length
+})
+
+    }
+    if(data=="hotel"){
+this.hotelbtncolor="linear-gradient(to right,#f0772c,#f95776)"
+this.holidaybtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
+this.servicetype="hotel"
+this.hotobj.viewhotels().subscribe(res=>{
+  this.hotelitems=res["message"]
+  this.hotlen=this.hotelitems.length
+})
+
+    }
+  }
+
+
+
+
+
+
   onClickSubmit(data:any){
     console.log(data)
     if(data.activitytype=="create" && data.servicetype=="hotel")
@@ -106,4 +163,23 @@ export class AdminComponent implements OnInit,OnDestroy {
     console.log("error")}
     )*/
    }
+
+   deletepackageitem(data:any){
+     this.packobj.deletepackage(data).subscribe(res=>{
+       if(res["message"]=="Package deleted successfully")
+       {
+         this.packlen=this.packlen-1
+         alert("package deleted successfully");
+       }
+     })
+   }
+   deletehotelitem(data:any){
+    this.hotobj.deletehotel(data).subscribe(res=>{
+      if(res["message"]=="Hotel deleted successfully")
+      {
+        this.hotlen=this.hotlen-1
+        alert("Hotel deleted successfully");
+      }
+    })
+  }
 }

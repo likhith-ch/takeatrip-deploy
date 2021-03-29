@@ -13,7 +13,7 @@ export class AppComponent implements OnInit,OnDestroy {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event:any) {
     const numb = window.scrollY;
-    if (numb >= 10){
+    if (numb > 5){
       this.scrolled = 1;
     }
     else {

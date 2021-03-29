@@ -1,4 +1,5 @@
 <div class="launch-page-div">
+  <div class=" d-none d-md-block">
 <div id="header" *ngIf="scrolled == 0" >
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex flex-row justify-content-between">
@@ -15,7 +16,7 @@
         </div>
     </div>
 <div id="header2" *ngIf="scrolled == 1">
-    <nav class="navbar navbar-expand-md navbar-light bg-light pt-5">
+    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"><img src="../../assets/logos/logoblue.png"  height="40px"/></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +37,31 @@
         </div>
       </nav>
     </div>
-<a routerLink="admin">admin</a>
+  </div>
+
+
+  <div id="header3" class="d-block d-md-none">
+    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="../../assets/logos/logoblue.png"  height="40px"/></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <div class="container w-50">
+                <div class="d-flex flex-row justify-content-center" >
+                    <div style="text-align: center;"><a class="navbar-brand " href="#"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
+                    <br><span class="text-dark" style="text-align: center;">Hotels</span></a></div>
+                    <div style="text-align: center;"><a class="navbar-brand " href="#"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
+                              </div>
+                            </div>
+                <div class=" d-flex flex-row justify-content-center" >
+                <div class="mt-2"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
+                </div>
+          </div>
+        </div>
+      </nav>
+    </div>
 <router-outlet></router-outlet>
 <footer style="background-color:black" class="mb-0 mt-3">
     <div class="container-fluid d-flex flex-row justify-content-between">
