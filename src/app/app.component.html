@@ -4,14 +4,20 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex flex-row justify-content-between">
 <div class="mt-2"><a class="navbar-brand " href="#"><img src="../../assets/logos/logowhite.png"  height="40px"/></a></div>
-<div class="mt-2"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
+<div class="mt-2" *ngIf="isloggedin=='removed'"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
+<div class="mt-2" *ngIf="isloggedin=='added'">
+  <div class="container-fluid d-flex flex-row justify-content-center align-items-baseline">
+    <div class="text-center mr-1 px-3"><p class="text-white" *ngIf="loggeduser!=''">Hello, {{loggeduser}}</p></div>
+    <div><a class="navbar-brand" routerLink="/"><button class="btn px-4 text-white" (click)="logoutuser()" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Logout</button></a></div>
+  </div>
+</div>
           </div>
         </nav>
         <div class="container w-50 bg-white mt-3 py-3 px-2" style="border-radius:25px;">
             <div class="d-flex flex-row justify-content-center" >
-                <div style="text-align: center;"><a class="navbar-brand " href="#"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
+                <div style="text-align: center;"><a class="navbar-brand " routerLink="hotels"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
                 <br><span class="text-dark" style="text-align: center;">Hotels</span></a></div>
-                <div style="text-align: center;"><a class="navbar-brand " href="#"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
+                <div style="text-align: center;"><a class="navbar-brand " routerLink="holidays"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
                           </div>
         </div>
     </div>
@@ -25,14 +31,20 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
               <div class="container w-50">
                 <div class="d-flex flex-row justify-content-center" >
-                    <div style="text-align: center;"><a class="navbar-brand " href="#"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
+                    <div style="text-align: center;"><a class="navbar-brand " routerLink="hotels"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
                     <br><span class="text-dark" style="text-align: center;">Hotels</span></a></div>
-                    <div style="text-align: center;"><a class="navbar-brand " href="#"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
+                    <div style="text-align: center;"><a class="navbar-brand " routerLink="holidays"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
                               </div>
                             </div>
                 <div class=" d-flex flex-row justify-content-center" >
-                <div class="mt-2"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
-                </div>
+                  <div class="mt-2" *ngIf="isloggedin=='removed'"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
+                  <div class="mt-2" *ngIf="isloggedin=='added'">
+                    <div class="container-fluid d-flex flex-row justify-content-center align-items-baseline">
+                      <div class="text-center mr-1 px-3"><p class="text-primary" *ngIf="loggeduser!=''">Hello, {{loggeduser}}</p></div>
+                      <div><a class="navbar-brand" routerLink="/"><button class="btn px-4 text-white" (click)="logoutuser()" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Logout</button></a></div>
+                    </div>
+                  </div> 
+              </div>
           </div>
         </div>
       </nav>
@@ -50,20 +62,24 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
               <div class="container w-50">
                 <div class="d-flex flex-row justify-content-center" >
-                    <div style="text-align: center;"><a class="navbar-brand " href="#"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
+                    <div style="text-align: center;"><a class="navbar-brand " routerLink="hotels"><i style='font-size:24px;color:#696969' class='fas fa-city'></i>
                     <br><span class="text-dark" style="text-align: center;">Hotels</span></a></div>
-                    <div style="text-align: center;"><a class="navbar-brand " href="#"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
+                    <div style="text-align: center;"><a class="navbar-brand " routerLink="holidays"><i class="fas fa-parachute-box" style='font-size:24px;color:#696969'></i> <br><span class=" text-dark"  style="text-align: center;">Holidays</span></a></div>
                               </div>
                             </div>
                 <div class=" d-flex flex-row justify-content-center" >
-                <div class="mt-2"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
-                </div>
+                <div class="mt-2" *ngIf="isloggedin=='removed'"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
+                <div class="mt-2" *ngIf="isloggedin=='added'"><a class="navbar-brand" routerLink="/"><button class="btn px-4 text-white" (click)="logoutuser()" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Logout</button></a></div>  
+              </div>
           </div>
         </div>
       </nav>
+      <div class="container-fluid d-flex flex-row justify-content-end  mt-5">
+        <div class="text-center mr-1 pt-4"><p class="text-white" *ngIf="loggeduser!=''">Hello, {{loggeduser}}</p></div>
+      </div>
     </div>
 <router-outlet></router-outlet>
-<footer style="background-color:black" class="mb-0 mt-3">
+<footer style="background-color:black" class="mb-0 mt-5">
     <div class="container-fluid d-flex flex-row justify-content-between">
         <div class="mt-2 pt-3"><a class="navbar-brand " href="#"><i style="font-size:26px;color: white;" class="fa">&#xf09a;</i></a></div>
         <div class="mt-2"><h5 class="text-white">&copy; Copy Rights 2021</h5>

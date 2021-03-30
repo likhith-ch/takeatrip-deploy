@@ -1,3 +1,4 @@
+import { LocalstorageService } from './../localstorage.service';
 import { Router } from '@angular/router';
 import { HotelsService } from './../hotels.service';
 import { HolidaysService } from './../holidays.service';
@@ -19,7 +20,7 @@ export class AdminComponent implements OnInit,OnDestroy {
 addbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
 hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
-  constructor(private packobj:HolidaysService,private hotobj:HotelsService,private router:Router) { }
+  constructor(private packobj:HolidaysService,private hotobj:HotelsService,private router:Router,private local:LocalstorageService) { }
   formdata=new FormData();
   file:any;
   incomingfile(event:any)
@@ -29,8 +30,24 @@ hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 
   ngOnInit(): void {
     this.packobj.viewpackages().subscribe(res=>{
+      if(res["message"]=="failed"){
+        alert(res["reason"])
+        this.local.removeItem();
+        this.router.navigateByUrl("/login")
+    
+      }
       this.packageitems=res["message"]
       this.packlen=this.packageitems.length
+    })
+    this.hotobj.viewhotels().subscribe(res=>{
+      if(res["message"]=="failed"){
+        alert(res["reason"])
+        this.local.removeItem();
+        this.router.navigateByUrl("/login")
+    
+      }
+      this.hotelitems=res["message"]
+      this.hotlen=this.hotelitems.length
     })
   }
   ngOnDestroy():void{
@@ -56,6 +73,12 @@ this.actiontype="add"
 this.holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
 this.servicetype="holiday"
 this.packobj.viewpackages().subscribe(res=>{
+  if(res["message"]=="failed"){
+    alert(res["reason"])
+    this.local.removeItem();
+    this.router.navigateByUrl("/login")
+
+  }
   this.packageitems=res["message"]
   this.packlen=this.packageitems.length
 })
@@ -66,9 +89,16 @@ this.hotelbtncolor="linear-gradient(to right,#f0772c,#f95776)"
 this.holidaybtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 this.servicetype="hotel"
 this.hotobj.viewhotels().subscribe(res=>{
+  if(res["message"]=="failed"){
+    alert(res["reason"])
+    this.local.removeItem();
+    this.router.navigateByUrl("/login")
+
+  }
   this.hotelitems=res["message"]
   this.hotlen=this.hotelitems.length
 })
+
 
     }
   }
@@ -86,6 +116,12 @@ this.hotobj.viewhotels().subscribe(res=>{
     this.formdata.append("hotelObj",JSON.stringify(data));
     this.hotobj.createhotel(this.formdata).subscribe(
       res=>{
+        if(res["message"]=="failed"){
+          alert(res["reason"])
+          this.local.removeItem();
+          this.router.navigateByUrl("/login")
+
+        }
         if(res["message"]=="hotel successfully added"){
           alert("Hotel added Sucessfully")
           this.router.navigateByUrl("/admin")
@@ -105,7 +141,13 @@ this.hotobj.viewhotels().subscribe(res=>{
     this.formdata.append("holidayObj",JSON.stringify(data));
     this.packobj.createpackage(this.formdata).subscribe(
       res=>{
-        if(res["message"]=="Holiday Package successfully added"){
+        if(res["message"]=="failed"){
+          alert(res["reason"])
+          this.local.removeItem();
+          this.router.navigateByUrl("/login")
+
+        }
+        if(res["message"]=="Holiday Package successfully added" ){
           alert("Holiday Package successfully added")
           this.router.navigateByUrl("/admin")
         }
@@ -120,8 +162,19 @@ this.hotobj.viewhotels().subscribe(res=>{
     }
     if(data.activitytype=="modify" && data.servicetype=="hotel")
     {
+      if(data.hotelid=="" )
+    {
+      alert("Select Hotel Id")
+      return;
+    }
       this.hotobj.updatehotel(data).subscribe(
         res=>{
+          if(res["message"]=="failed"){
+            alert(res["reason"])
+            this.local.removeItem();
+            this.router.navigateByUrl("/login")
+  
+          }
           if(res["message"]=="Hotel updated successfully"){
             alert("Hotel updated successfully")
             this.router.navigateByUrl("/admin")
@@ -133,9 +186,19 @@ this.hotobj.viewhotels().subscribe(res=>{
       )
     }
     if(data.activitytype=="modify" && data.servicetype=="holiday")
+    {if(data.packageid=="" )
     {
+      alert("Select package Id")
+      return;
+    }
       this.packobj.updatepackage(data).subscribe(
         res=>{
+          if(res["message"]=="failed"){
+            alert(res["reason"])
+            this.local.removeItem();
+            this.router.navigateByUrl("/login")
+  
+          }
           if(res["message"]=="Holiday package updated successfully"){
             alert("Holiday package updated successfully")
             this.router.navigateByUrl("/admin")

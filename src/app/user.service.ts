@@ -16,4 +16,7 @@ loginuser(data:any):Observable<any>{
 getuser(data:any):Observable<any>{
   return this.hc.get("user/getuser/"+data.username)
 }
+loginadmin(data:any):Observable<any>{
+  return this.hc.post("admin/checkpasswordasync",data)
+}
 }

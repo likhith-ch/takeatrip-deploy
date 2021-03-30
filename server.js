@@ -8,10 +8,12 @@ const mongoose = require('mongoose');
 const userApiObj=require("./APIS/user-api")
 const hotelsApiObj=require("./APIS/hotels-api")
 const holidayApiObj=require("./APIS/holiday-api")
+const adminApiObj=require("./APIS/admin-api")
 const port=process.env.PORT
 app.use("/user",userApiObj)
 app.use("/hotels",hotelsApiObj)
 app.use("/holiday",holidayApiObj)
+app.use("/admin",adminApiObj)
 mongoose.connect(process.env.DBURL, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error',()=>{ console.log('connection error:')});

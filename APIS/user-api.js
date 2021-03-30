@@ -1,5 +1,6 @@
 const exp=require("express")
 const User = require("../models/Users.js")
+const verifyToken=require('./middlewares/verifytokens')
 //const Product = require("../models/Products.js")
 require("dotenv").config()
 const userapiObj=exp()
@@ -39,7 +40,7 @@ userapiObj.get("/getuser/:username",errHandler(async (req,res)=>{
 
 
 
-userapiObj.post("/checkpasswordasync",async (req,res)=>{
+userapiObj.post("/checkpasswordasync",errHandler(async (req,res)=>{
     let dobj=req.body
     let userFromDb= await User.findOne({"username":dobj.username})
     if(!userFromDb){
@@ -51,10 +52,10 @@ userapiObj.post("/checkpasswordasync",async (req,res)=>{
     res.send(false)
     }
     else{
-        let signedToken= await jsonwebtoken.sign({username:userFromDb.username},process.env.SECRET,{expiresIn:100})
+        let signedToken= await jsonwebtoken.sign({username:userFromDb.username},process.env.SECRET,{expiresIn:1000})
         res.send({message:"login success",token:signedToken,username:userFromDb.username})
     }
-})
+}))
 
 
 /*userapiObj.post("/getcartproducts",async (req,res)=>{

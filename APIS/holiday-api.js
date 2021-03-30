@@ -2,6 +2,7 @@ const exp=require("express")
 const Holiday= require("../models/holidays.js")
 const holidaysapiObj=exp()
 const bcrypt=require("bcrypt")
+const verifyToken=require('./middlewares/verifytokens')
 require("dotenv").config()
 const errHandler=require("express-async-handler")
 const cloudinary = require("cloudinary").v2
@@ -26,7 +27,7 @@ var upload = multer({ storage: storage });
 
 holidaysapiObj.use(exp.json())
 module.exports=holidaysapiObj
-holidaysapiObj.post("/createpackage",upload.single('image'),async (req,res)=>{
+holidaysapiObj.post("/createpackage",upload.single('image'),verifyToken,errHandler(async (req,res)=>{
     req.body=JSON.parse(req.body.holidayObj)
 req.body.image=req.file.path;
 let dobj=req.body
@@ -49,10 +50,10 @@ let dobj=req.body
         await holidayObjtoModel.save()
     res.send({message:"Holiday Package successfully added"})
     }
-})
+}))
 
 
-holidaysapiObj.get("/getpackages",errHandler(async (req,res)=>{
+holidaysapiObj.get("/getpackages",verifyToken,errHandler(async (req,res)=>{
     let holidayObj= await Holiday.find()
     res.send({message:holidayObj})
 }))
@@ -66,17 +67,17 @@ holidaysapiObj.get("/getproduct/:productId",errHandler(async (req,res)=>{
 }))
 
 
-holidaysapiObj.post("/updatepackage",errHandler(async (req,res)=>{
+holidaysapiObj.post("/updatepackage",verifyToken,errHandler(async (req,res)=>{
     let dobj=req.body
     let updateddata={}
     console.log("Call reached service")
-    if(dobj.packagenights!=""){
+    if(dobj.packagenights!="" && dobj.packagenights!=null){
         updateddata["package_nights"]=dobj.packagenights
     }
-    if(dobj.packageprice!=""){
+    if(dobj.packageprice!="" && dobj.packageprice!=null){
         updateddata["package_price"]=dobj.packageprice
     }
-    if(dobj.packagefeatures!=""){
+    if(dobj.packagefeatures!="" && dobj.packagefeatures!=null ){
         updateddata["package_features"]=dobj.packagefeatures
     }
 
@@ -85,7 +86,7 @@ holidaysapiObj.post("/updatepackage",errHandler(async (req,res)=>{
 }))
 
 
-holidaysapiObj.delete("/deletepackage/:package_id",errHandler(async (req,res)=>{
+holidaysapiObj.delete("/deletepackage/:package_id",verifyToken,errHandler(async (req,res)=>{
     console.log("hello")
     await Holiday.deleteOne({package_id:req.params.package_id})
     res.send({message:"Package deleted successfully"})

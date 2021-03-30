@@ -3,6 +3,7 @@ const Hotel= require("../models/Hotels.js")
 const hotelsapiObj=exp()
 const bcrypt=require("bcrypt")
 require("dotenv").config()
+const verifyToken=require('./middlewares/verifytokens')
 const errHandler=require("express-async-handler")
 const cloudinary = require("cloudinary").v2
 const { CloudinaryStorage } = require("multer-storage-cloudinary")
@@ -26,7 +27,7 @@ var upload = multer({ storage: storage });
 
 hotelsapiObj.use(exp.json())
 module.exports=hotelsapiObj
-hotelsapiObj.post("/createhotel",upload.single('image'),async (req,res)=>{
+hotelsapiObj.post("/createhotel",upload.single('image'),verifyToken,errHandler(async (req,res)=>{
     req.body=JSON.parse(req.body.hotelObj)
 req.body.image=req.file.path;
 let dobj=req.body
@@ -49,10 +50,10 @@ let dobj=req.body
         await hotelObjtoModel.save()
     res.send({message:"hotel successfully added"})
     }
-})
+}))
 
 
-hotelsapiObj.get("/gethotels",errHandler(async (req,res)=>{
+hotelsapiObj.get("/gethotels",verifyToken,errHandler(async (req,res)=>{
     let hotelObj= await Hotel.find()
     res.send({message:hotelObj})
 }))
@@ -66,16 +67,16 @@ hotelsapiObj.get("/getproduct/:productId",errHandler(async (req,res)=>{
 }))
 
 
-hotelsapiObj.post("/updatehotel",errHandler(async (req,res)=>{
+hotelsapiObj.post("/updatehotel",verifyToken,errHandler(async (req,res)=>{
     let dobj=req.body
     let updateddata={}
-    if(dobj.hotelname!=""){
+    if(dobj.hotelname!="" && dobj.hotelname!=null){
         updateddata["hotel_name"]=dobj.hotelname
     }
     if(dobj.hotelrooms!="" && dobj.hotelrooms!=null){
     updateddata["hotel_rooms_count"]=dobj.hotelrooms
     }
-    if(dobj.hotelprice!=""){
+    if(dobj.hotelprice!="" && dobj.hotelprice!=null){
         updateddata["hotel_price_pernight"]=dobj.hotelprice
     }
         
@@ -84,7 +85,7 @@ hotelsapiObj.post("/updatehotel",errHandler(async (req,res)=>{
 }))
 
 
-hotelsapiObj.delete("/deletehotel/:hotel_id",errHandler(async (req,res)=>{
+hotelsapiObj.delete("/deletehotel/:hotel_id",verifyToken,errHandler(async (req,res)=>{
     await Hotel.deleteOne({hotel_id:req.params.hotel_id})
     res.send({message:"Hotel deleted successfully"})
 }))

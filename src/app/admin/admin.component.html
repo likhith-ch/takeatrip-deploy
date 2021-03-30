@@ -106,8 +106,14 @@
       <div class="mb-3 text-center">
         <h5 class="tracking-in-expand text-white">Update Holiday Package</h5>
       </div>
-        <div class="mb-3">
+       <!-- <div class="mb-3">
                 <input type="text" class="form-control" id="packageid" placeholder="Enter Holiday Package  Id" name="packageid" required ngModel>
+              </div>-->
+              <div class="mb-3">
+                <select class="form-select" aria-label="Default select example" required placeholder="Enter Holiday Package  Id" name="packageid" ngModel *ngFor="let package of packageitems">
+                  <option  [value]="package.package_id">{{package.package_id}}</option>
+                </select>
+                <div id="emailHelp" class="form-text text-white">Select package Id.</div>
               </div>
           
          
@@ -135,8 +141,14 @@
           <div class="mb-3 text-center">
             <h5 class="tracking-in-expand text-white">Update Hotel</h5>
           </div>
-            <div class="mb-3">
+            <!--<div class="mb-3">
                     <input type="text" class="form-control" id="hotelid" placeholder="Enter Hotel Id" name="hotelid" required ngModel>
+                  </div>-->
+                  <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" required  name="hotelid" ngModel *ngFor="let hotel of hotelitems">
+                      <option  [value]="hotel.hotel_id">{{hotel.hotel_id}}</option>
+                    </select>
+                    <div id="emailHelp" class="form-text text-white">Select Hotel Id.</div>
                   </div>
               <div class="mb-3">
                 <input type="text" class="form-control" id="hotelname" placeholder="Enter Hotel name" name="hotelname" ngModel>
@@ -161,10 +173,9 @@
 <!--Display holiday packages if admin selects-->
 <div *ngIf="actiontype=='view' && servicetype=='holiday'">
 <div class="container text-center text-white" *ngIf="packlen==0"><h4>No Holiday packages to display</h4></div>
-<div class="container" *ngIf="packlen!=0">
-    <div class="row" >
-        <div class="col-md-4" *ngFor='let package of packageitems'>
-          <div class="card mt-3 text-center">
+<div class="container d-flex flex-row justify-content-center" *ngIf="packlen!=0">
+        <div *ngFor='let package of packageitems'>
+          <div class="card mt-3 text-center mr-2" style='width: 15rem;'>
               <img [src]="package.image" class="imgcenter card-img-top" style="width:100%;height:200px">
               <div class="card-body">
                 <h5 class="card-title">{{package.package_name}}</h5>
@@ -178,7 +189,7 @@
             </div>
           
         </div>
-      </div>
+      
     </div>
   </div>
 
@@ -186,10 +197,9 @@
   <!--Display hotels if admin selects-->
 <div *ngIf="actiontype=='view' && servicetype=='hotel'">
   <div class="container text-center text-white" *ngIf="hotlen==0"><h4>No Hotels to display</h4></div>
-  <div class="container" *ngIf="hotlen!=0">
-      <div class="row" >
-          <div class="col-md-4" *ngFor='let hotel of hotelitems'>
-            <div class="card mt-3 text-center">
+  <div class="container d-flex flex-row justify-content-center" *ngIf="hotlen!=0">
+          <div *ngFor='let hotel of hotelitems'>
+            <div class="card mt-3 text-center mr-2"  style='width: 15rem;'>
                 <img [src]="hotel.image" class="imgcenter card-img-top" style="width:100%;height:200px">
                 <div class="card-body">
                   <h5 class="card-title">{{hotel.hotel_name}}</h5>
@@ -204,7 +214,6 @@
               </div>
             
           </div>
-        </div>
       </div>
     </div>
   
