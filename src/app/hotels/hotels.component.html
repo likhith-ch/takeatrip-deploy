@@ -1,19 +1,97 @@
 
 <div class=" container bg-white w-75 p-3 rounded mt-3">
-  
-        <table class="table table-bordered rounded ">
-            <tbody>
-                <tr>
-                <td>
-                <label for="city">From City
-                  <input type="text" id="city">
-                </label>
-                </td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                </tbody>
-          </table>
+  <div class="text-center" style="color:#1885f1"><h5>Hotels</h5></div>
+  <div class="row border border-dark rounded m-3 p-3">
+  <div  class="col-md-3"  style="border-right: 1px solid grey">
+<input list="menace" name="menace" placeholder="CITY" class="form-control no-border" [(ngModel)]="selectedcity" (ngModelChange)="onchange()">
+<datalist id="menace" >
+<option *ngFor="let city of cities"  [value]="city">{{city}} </option>
+ </datalist>
+</div>
+<!--<div class="text-primary" *ngIf="!cities.includes(selectedcity)">Please select city from list</div>-->
+<div  class="col-md-3" style="border-right: 1px solid grey">
+  <input type="text" placeholder="Check-in Date" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control no-border" [(ngModel)]="checkindate" (ngModelChange)="onchange()">
+<!--<input class="form-control no-border" type="date" placeholder="Check-in Date" [(ngModel)]="checkindate" (ngModelChange)="onchange()">-->
+</div>
+<div  class="col-md-3" style="border-right: 1px solid grey">
+  <input type="text" placeholder="Check-out Date" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control no-border" [(ngModel)]="checkoutdate" (ngModelChange)="onchange()">
+<!--<input class="form-control no-border" type="date" placeholder="Check-in Date" [(ngModel)]="checkindate" (ngModelChange)="onchange()">-->
+</div>
+
+<div  class="col-md-3">
+  <input type="number" placeholder="Rooms"  class="form-control no-border" [(ngModel)]="roomscount" (ngModelChange)="onchange()" min="1" max="5">
+<!--<input class="form-control no-border" type="date" placeholder="Check-in Date" [(ngModel)]="checkindate" (ngModelChange)="onchange()">-->
+</div>
+
+
+</div>
+<div class="text-center"><a class="navbar-brand" routerLink="/"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Search</button></a></div>
     
 </div>
+<div class=" container bg-white w-75 p-3 rounded mt-3">
+  <div class="text-center"  style="color:#087df3"><h5 class="small">Find hotels in 10+ cities</h5></div>
+<div class=" d-md-flex flex-row justify-content-between" >
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/hyderabad.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-3"><h5 class="text-center">Hyderabad</h5><p class="small">హైదరాబాద్ </p></div>
+    </div>
+  </div> 
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/banglore.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-3"><h5 class="text-center">Banglore</h5><p class="small">ಬೆಂಗಳೂರು</p></div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/chennai.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-3"><h5 class="text-center">Chennai</h5><p class="small">சென்னை</p></div>
+    </div>
+    </div>
+</div> 
+<!--Second row of cities-->
+<div class=" d-md-flex flex-row justify-content-between" >
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/mumbai.jpg" style="border-radius:50%;width:70px;height:50px"/></div>
+      <div class="px-3"><h5 class="text-center">Mumbai</h5><p class="small">मुंबई</p></div>
+    </div>
+  </div> 
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/kerala.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-3"><h5 class="text-center">Kochi</h5><p class="small">കൊച്ചി</p></div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center mx-4"><img src="../../assets/cities/goa.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-3"><h5 class="text-center">Goa</h5><p class="small">गोवा</p></div>
+    </div>
+    </div>
+</div> 
+<!--Third row cities-->
+<div class=" d-md-flex flex-row justify-content-between" >
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/kolkata.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-3"><h5 class="text-center">Kolkata</h5><p class="small">কলকাতা</p></div>
+    </div>
+  </div> 
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/vijayawada.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-2"><h5 class="text-center">Vijayawada</h5><p class="small">విజయవాడ</p></div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <div class="container-fluid d-flex flex-row justify-content-center align-items-bottom">
+      <div class="text-center"><img src="../../assets/cities/delhi.jpg" style="border-radius:50%;width:70px"/></div>
+      <div class="px-4"><h5 class="text-center">Delhi</h5><p class="small">दिल्ली</p></div>
+    </div>
+    </div>
+</div> 
+
+</div>
+
