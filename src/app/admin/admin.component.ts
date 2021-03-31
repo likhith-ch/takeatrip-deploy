@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HotelsService } from './../hotels.service';
 import { HolidaysService } from './../holidays.service';
 import { Component, OnInit,OnDestroy } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-admin',
@@ -20,7 +22,7 @@ export class AdminComponent implements OnInit,OnDestroy {
 addbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
 hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
-  constructor(private packobj:HolidaysService,private hotobj:HotelsService,private router:Router,private local:LocalstorageService) { }
+  constructor(private packobj:HolidaysService,private hotobj:HotelsService,private router:Router,private local:LocalstorageService,private toastr: ToastrService) { }
   formdata=new FormData();
   file:any;
   incomingfile(event:any)
@@ -31,7 +33,7 @@ hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
   ngOnInit(): void {
     this.packobj.viewpackages().subscribe(res=>{
       if(res["message"]=="failed"){
-        alert(res["reason"])
+        this.toastr.error(res["reason"])
         this.local.removeItem();
         this.router.navigateByUrl("/login")
     
@@ -41,7 +43,6 @@ hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
     })
     this.hotobj.viewhotels().subscribe(res=>{
       if(res["message"]=="failed"){
-        alert(res["reason"])
         this.local.removeItem();
         this.router.navigateByUrl("/login")
     
@@ -74,7 +75,7 @@ this.holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
 this.servicetype="holiday"
 this.packobj.viewpackages().subscribe(res=>{
   if(res["message"]=="failed"){
-    alert(res["reason"])
+    this.toastr.error(res["reason"])
     this.local.removeItem();
     this.router.navigateByUrl("/login")
 
@@ -90,7 +91,7 @@ this.holidaybtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 this.servicetype="hotel"
 this.hotobj.viewhotels().subscribe(res=>{
   if(res["message"]=="failed"){
-    alert(res["reason"])
+    this.toastr.error(res["reason"])
     this.local.removeItem();
     this.router.navigateByUrl("/login")
 
@@ -117,21 +118,21 @@ this.hotobj.viewhotels().subscribe(res=>{
     this.hotobj.createhotel(this.formdata).subscribe(
       res=>{
         if(res["message"]=="failed"){
-          alert(res["reason"])
+          this.toastr.error(res["reason"])
           this.local.removeItem();
           this.router.navigateByUrl("/login")
 
         }
         if(res["message"]=="hotel successfully added"){
-          alert("Hotel added Sucessfully")
+          this.toastr.success("Hotel added Sucessfully")
           this.router.navigateByUrl("/admin")
         }
         else{
-          alert("Hotel id already exists please try to update hotel if needed.")
+      this.toastr.warning("Hotel id already exists please try to update hotel if needed.")
         }
 
       },
-      err=>{alert("something went wrong")
+      err=>{this.toastr.error("something went wrong")
     console.log("error")}
     )
     }
@@ -142,21 +143,21 @@ this.hotobj.viewhotels().subscribe(res=>{
     this.packobj.createpackage(this.formdata).subscribe(
       res=>{
         if(res["message"]=="failed"){
-          alert(res["reason"])
+          this.toastr.error(res["reason"])
           this.local.removeItem();
           this.router.navigateByUrl("/login")
 
         }
         if(res["message"]=="Holiday Package successfully added" ){
-          alert("Holiday Package successfully added")
+          this.toastr.success("Holiday Package successfully added")
           this.router.navigateByUrl("/admin")
         }
         else{
-          alert("Holiday package already exists please try to update Package if needed.")
+          this.toastr.warning("Holiday package already exists please try to update Package if needed.")
         }
 
       },
-      err=>{alert("something went wrong")
+      err=>{this.toastr.error("something went wrong")
     console.log("error")}
     )
     }
@@ -164,48 +165,48 @@ this.hotobj.viewhotels().subscribe(res=>{
     {
       if(data.hotelid=="" )
     {
-      alert("Select Hotel Id")
+      this.toastr.warning("Select Hotel Id")
       return;
     }
       this.hotobj.updatehotel(data).subscribe(
         res=>{
           if(res["message"]=="failed"){
-            alert(res["reason"])
+            this.toastr.error(res["reason"])
             this.local.removeItem();
             this.router.navigateByUrl("/login")
   
           }
           if(res["message"]=="Hotel updated successfully"){
-            alert("Hotel updated successfully")
+        this.toastr.success("Hotel updated successfully")
             this.router.navigateByUrl("/admin")
           }
   
         },
-        err=>{alert("something went wrong")
+        err=>{this.toastr.error("something went wrong")
       console.log("error")}
       )
     }
     if(data.activitytype=="modify" && data.servicetype=="holiday")
     {if(data.packageid=="" )
     {
-      alert("Select package Id")
+     this.toastr.warning("Select package Id")
       return;
     }
       this.packobj.updatepackage(data).subscribe(
         res=>{
           if(res["message"]=="failed"){
-            alert(res["reason"])
+            this.toastr.error(res["reason"])
             this.local.removeItem();
             this.router.navigateByUrl("/login")
   
           }
           if(res["message"]=="Holiday package updated successfully"){
-            alert("Holiday package updated successfully")
+            this.toastr.success("Holiday package updated successfully")
             this.router.navigateByUrl("/admin")
           }
   
         },
-        err=>{alert("something went wrong")
+        err=>{this.toastr.error("something went wrong")
       console.log("error")}
       )
   
@@ -232,7 +233,7 @@ this.hotobj.viewhotels().subscribe(res=>{
        if(res["message"]=="Package deleted successfully")
        {
          this.packlen=this.packlen-1
-         alert("package deleted successfully");
+         this.toastr.success("package deleted successfully");
        }
      })
    }
@@ -241,7 +242,7 @@ this.hotobj.viewhotels().subscribe(res=>{
       if(res["message"]=="Hotel deleted successfully")
       {
         this.hotlen=this.hotlen-1
-        alert("Hotel deleted successfully");
+        this.toastr.success("Hotel deleted successfully");
       }
     })
   }

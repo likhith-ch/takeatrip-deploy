@@ -28,6 +28,7 @@ this.loggeduser=localStorage.getItem("username")
 this.router.navigateByUrl("/admin")
 this.loggeduser=localStorage.getItem("username")
     }
+    
   }
   ngOnDestroy():void{}
   @HostListener('window:scroll', ['$event'])

@@ -6,7 +6,12 @@ import { AdminComponent } from './admin/admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [{path:"admin",component:AdminComponent},
+const routes: Routes = [{
+  path: '',
+  pathMatch: 'full',
+  redirectTo: 'hotels'
+},
+  {path:"admin",component:AdminComponent},
                         {path:"login",component:LoginComponent},
                         {path:"register",component:RegisterComponent},
                         {path:"holidays",component:HolidaysComponent},

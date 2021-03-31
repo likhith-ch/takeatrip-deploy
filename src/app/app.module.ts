@@ -11,6 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { HotelsComponent } from './hotels/hotels.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { TravelblogComponent } from './travelblog/travelblog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,14 +21,17 @@ import { HotelsComponent } from './hotels/hotels.component';
     LoginComponent,
     RegisterComponent,
     HolidaysComponent,
-    HotelsComponent
+    HotelsComponent,
+    TravelblogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot({positionClass: 'toast-top-center'})
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AutharizationService,multi:true}],
   bootstrap: [AppComponent]
