@@ -32,3 +32,14 @@
   font-size: .875em;
   color: #dc3545;
 }
+
+  
+      .ngx-slider-pointer-min {
+        outline: none;
+
+      }
+      .ngx-slider-pointer-max{
+        outline: none;
+        }
+        
+  

@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "~11.1.1",
     "@angular/common": "~11.1.1",
     "@angular/compiler": "~11.1.1",
@@ -28,6 +29,7 @@
     "mongoose": "^5.12.2",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^4.0.0",
+    "ngx-slider": "0.0.5",
     "ngx-toastr": "^13.2.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",

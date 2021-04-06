@@ -17,8 +17,13 @@ export class HolidaysService {
           viewpackages():Observable<any>{
             return this.hc.get("holiday/getpackages")
               }
+              getcitypackages(data:any):Observable<any>{
+                return this.hc.get("holiday/getcitypackage/"+data)
+                  }
               deletepackage(data:any):Observable<any>{
-                console.log("/deletepackage/"+data)
                 return this.hc.delete("holiday/deletepackage/"+data)
+              }
+              getfilteredpackages(data:any):Observable<any>{
+                return this.hc.post("holiday/getfilteredpackages",data)
               }
 }

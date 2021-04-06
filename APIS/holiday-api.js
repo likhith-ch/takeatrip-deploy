@@ -61,11 +61,15 @@ holidaysapiObj.get("/getpackages",verifyToken,errHandler(async (req,res)=>{
 
 
 
-holidaysapiObj.get("/getproduct/:productId",errHandler(async (req,res)=>{
-    let holidayObj= await Holiday.findOne({productId:parseInt(req.params.productId)})
-    res.send({message:holidayObj})
+holidaysapiObj.get("/getcitypackage/:city",verifyToken,errHandler(async (req,res)=>{
+    let holidayObj= await Holiday.find({package_destination_city:req.params.city})
+    res.send({message:"fetched successfully",packagelist:holidayObj})
 }))
-
+holidaysapiObj.post("/getfilteredpackages",verifyToken,errHandler(async (req,res)=>{
+    dobj=req.body
+    let holidayObj= await Holiday.find({package_destination_city:dobj.city,package_nights:{$gte:parseInt(dobj.minnights), $lte:parseInt(dobj.maxnights)},package_price:{$gte:parseInt(dobj.minprice), $lte:parseInt(dobj.maxprice)}})
+    res.send({message:"fetched successfully",filteredpackagelist:holidayObj})
+}))
 
 holidaysapiObj.post("/updatepackage",verifyToken,errHandler(async (req,res)=>{
     let dobj=req.body

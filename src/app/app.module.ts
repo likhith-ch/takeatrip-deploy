@@ -17,6 +17,8 @@ import { TravelblogComponent } from './travelblog/travelblog.component';
 import { HotelsearchComponent } from './hotelsearch/hotelsearch.component';
 import { BookserviceComponent } from './bookservice/bookservice.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { HolidaysearchComponent } from './holidaysearch/holidaysearch.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,8 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     TravelblogComponent,
     HotelsearchComponent,
     BookserviceComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    HolidaysearchComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     RouterModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSliderModule,
     ToastrModule.forRoot({positionClass: 'toast-top-center'})
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AutharizationService,multi:true}],
