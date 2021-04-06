@@ -15,12 +15,13 @@ export class BookserviceComponent implements OnInit {
   hoteldata:any
   date1:any
 date2:any
-ckindt:any
-ckoutdt:any
-Difference_In_Time:any
-numberofdays:any
-totalhotelcost:any
-rooms:any
+tripenddate:any="Please select start date"
+ckindt:any;ckoutdt:any;Difference_In_Time:any;numberofdays:any;totalhotelcost:any;rooms:any
+packagename:any;packagecost:any;packagedays:any;packagecity:any;packagefacilities:any;
+packageheadcount=1
+finalpackagecost:any
+packagestartdate:any
+startdatetostring:any
   constructor(private router:Router,private activatedRoute: ActivatedRoute,private hotobj:HotelsService,private toster:ToastrService,private userobj:UserService,private localstorage:LocalstorageService) { }
 
   ngOnInit(): void {
@@ -60,6 +61,16 @@ rooms:any
         console.log(this.totalhotelcost)
            }
       })}
+      //for holiday service
+      if(this.servicetype=='holiday')
+      {
+      this.packagename=localStorage.getItem("packagename");
+      this.packagecost=localStorage.getItem("packageprice");
+      this.packagedays=localStorage.getItem("packageduration");
+      this.packagecity=localStorage.getItem("packagecity");
+      this.packagefacilities=localStorage.getItem("packagefeatures");
+      this.finalpackagecost=this.packageheadcount*parseInt(this.packagecost)
+      }
   }
   bookhotel(data:any){
     if(!data.form.invalid){
@@ -85,6 +96,14 @@ rooms:any
   }
     else{this.toster.error("Unable to process payement.")}
   
+  }
+  onchange(){
+    this.finalpackagecost=this.packageheadcount*parseInt(this.packagecost)
+  }
+  onchangedate(){
+
+this.startdatetostring=new Date(this.packagestartdate).toDateString()
+this.tripenddate = new Date(new Date(this.packagestartdate).getTime()+(parseInt(this.packagedays)*24*60*60*1000)).toDateString();
   }
 
 }

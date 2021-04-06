@@ -75,4 +75,102 @@
     </div>
 
     <div class="text-center" style="color:#1885f1" *ngIf="servicetype=='holiday'"><h5>Book Holiday Package</h5></div>
+    <div *ngIf="servicetype=='holiday'">
+        <table class="table">
+            <thead class="table-light">
+                    <th scope="col">Booking details</th>
+            </thead>
+            <tbody class="text-center">
+                <tr>
+                    <td>Package name</td>
+                    <td>{{packagename}}</td>
+                </tr>
+                <tr>
+                    <td>Package destination City</td>
+                    <td>{{packagecity}}</td>
+                </tr>
+                <tr>
+                    <td>Cost per person</td>
+                    <td>{{packagecost}}</td>
+                </tr>
+                <tr>
+                    <td>Duration(in Nights)</td>
+                    <td>{{packagedays}}</td>
+                </tr>
+                <tr>
+                    <td>Package Includes</td>
+                    <td>{{packagefacilities}}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Number of persons</td>
+                    <td><input type="number" [(ngModel)]="packageheadcount" class="form-control w-50 container" min="1" (ngModelChange)="onchange()"></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;">Trip Start Date</td>
+                    <td><input type="date" [(ngModel)]="packagestartdate" class="form-control w-50 container" (ngModelChange)="onchangedate()" >
+                        {{startdatetostring}}</td>
+                    
+                </tr>
+                <tr>
+                    <td>Trip End Date</td>
+                    <td>{{tripenddate}}</td>
+                </tr>
+                <tr>
+                    <td>Total Package Cost</td>
+                    <td>{{finalpackagecost}}</td>
+                </tr>
+
+                
+              
+            </tbody>
+          </table>
+<th scope="col">Bank details</th>
+<div class="container w-75">
+  <form class="needs-validation was-validated" novalidate #checkoutForm="ngForm" (ngSubmit)="bookhotel(checkoutForm)">         
+<div class="row gy-3">
+    <div class="col-md-6">
+        <label for="cc-name" class="form-label">Name on Card</label>
+        <input type="text" class="form-control" id="cc-name" placeholder required #ccname="ngModel" name="cc-name" ngModel>
+        <small class="text-muted">Full name as displayed on card</small>
+        <div class="invalid-feedback">Name on card is required</div>
+    </div>
+    <div class="col-md-6">
+        <label for="cc-number" class="form-label">Debit Card Number</label>
+        <input type="text" class="form-control" id="cc-number" placeholder required #ccnumber="ngModel" name="cc-number" ngModel>
+        <div class="invalid-feedback">Credit card number is required</div>
+    </div>
+    <div class="col-md-3">
+        <label for="cc-expiration" class="form-label">Expiry</label>
+        <input type="text" class="form-control" id="cc-expiration" placeholder #ccexpiry="ngModel" required name="cc-expiration" ngModel>
+        <small class="text-muted">MM/YY</small>
+        <div class="invalid-feedback">Card expiry date required</div>
+    </div>
+    <div class="col-md-3">
+        <label for="cvv" class="form-label">CVV</label>
+        <input type="text" class="form-control" id="cvv" placeholder required name="cvv" #cvv="ngModel" ngModel>
+        <div class="invalid-feedback">CVV is required</div>
+    </div>
+    <button class="w-100 btn btn-lg text-white" type="submit" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Continue to checkout</button>
+</div>
+</form>
+</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
