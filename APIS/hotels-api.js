@@ -8,6 +8,24 @@ const errHandler=require("express-async-handler")
 const cloudinary = require("cloudinary").v2
 const { CloudinaryStorage } = require("multer-storage-cloudinary")
 const multer = require("multer")
+Date.prototype.addDay = function (days) {
+    let date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+  function getDate(strDate, stpDate) {
+    var dArray = new Array();
+    var cDate = strDate;
+    while (cDate <= stpDate) {
+          
+        // Adding the date to array
+        dArray.push(new Date (cDate).toLocaleString()); 
+          
+        // Increment the date by 1 day
+        cDate = cDate.addDay(1); 
+    }
+    return dArray;
+}
 
 cloudinary.config({
     cloud_name:"dhf3swlkx",
@@ -61,8 +79,8 @@ hotelsapiObj.get("/gethotels",verifyToken,errHandler(async (req,res)=>{
 
 
 
-hotelsapiObj.get("/getproduct/:productId",errHandler(async (req,res)=>{
-    let hotelObj= await Hotel.findOne({productId:parseInt(req.params.productId)})
+hotelsapiObj.get("/gethotel/:hotelid",verifyToken,errHandler(async (req,res)=>{
+    let hotelObj= await Hotel.findOne({hotel_id:req.params.hotelid})
     res.send({message:hotelObj})
 }))
 
@@ -88,4 +106,38 @@ hotelsapiObj.post("/updatehotel",verifyToken,errHandler(async (req,res)=>{
 hotelsapiObj.delete("/deletehotel/:hotel_id",verifyToken,errHandler(async (req,res)=>{
     await Hotel.deleteOne({hotel_id:req.params.hotel_id})
     res.send({message:"Hotel deleted successfully"})
+}))
+hotelsapiObj.post("/checkavailablehotels",verifyToken,errHandler(async (req,res)=>{
+dobj=req.body  
+availablehotels=[]
+hotelsfound=0
+checkin=new Date(dobj.checkindate)
+checkout=new Date(dobj.checkoutdate)
+console.log(dobj.rooms)
+let datesarray=getDate(checkin,checkout)
+hotelsincity=await Hotel.find({hotel_city:dobj.city}) 
+if(hotelsincity!=null){
+    //iteration for each hotel in hotels located in that city
+    for(hotel of hotelsincity){
+    //array to get booked dates in a hotel
+     let bookeddates = hotel["daywise_bookings"].map(a => a.date);
+     availabilitycount=0
+     for(day of datesarray){
+         //check if hotel is available for all dates choosen by user
+         if(bookeddates.includes(day)){
+            let obj = hotel["daywise_bookings"].find(obj => obj.date == day);
+            if((obj.count+parseInt(dobj.rooms))<=hotel["hotel_rooms_count"]){
+                availabilitycount=availabilitycount+1
+            }
+         }
+         else{availabilitycount=availabilitycount+1}
+     }
+     if(availabilitycount==datesarray.length){availablehotels.push(hotel)}
+    
+
+    }
+    
+}
+res.send({message:"hotels searched",hotelslist:availablehotels})
+
 }))

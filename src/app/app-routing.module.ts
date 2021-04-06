@@ -1,3 +1,6 @@
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { BookserviceComponent } from './bookservice/bookservice.component';
+import { HotelsearchComponent } from './hotelsearch/hotelsearch.component';
 import { HotelsComponent } from './hotels/hotels.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { RegisterComponent } from './register/register.component';
@@ -15,7 +18,10 @@ const routes: Routes = [{
                         {path:"login",component:LoginComponent},
                         {path:"register",component:RegisterComponent},
                         {path:"holidays",component:HolidaysComponent},
-                        {path:"hotels",component:HotelsComponent}];
+                        {path:"hotels",component:HotelsComponent},
+                        {path:"hotelsearch/:city/:checkindate/:checkoutdate/:roomscount",component:HotelsearchComponent},
+                        {path:"bookservice/:servicetype",component:BookserviceComponent},
+                        {path:"userprofile",component:UserprofileComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{useHash:true})],

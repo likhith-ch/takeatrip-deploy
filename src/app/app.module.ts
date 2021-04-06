@@ -14,6 +14,9 @@ import { HotelsComponent } from './hotels/hotels.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TravelblogComponent } from './travelblog/travelblog.component';
+import { HotelsearchComponent } from './hotelsearch/hotelsearch.component';
+import { BookserviceComponent } from './bookservice/bookservice.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,10 @@ import { TravelblogComponent } from './travelblog/travelblog.component';
     RegisterComponent,
     HolidaysComponent,
     HotelsComponent,
-    TravelblogComponent
+    TravelblogComponent,
+    HotelsearchComponent,
+    BookserviceComponent,
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,

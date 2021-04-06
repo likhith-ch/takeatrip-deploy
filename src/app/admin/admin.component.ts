@@ -115,6 +115,7 @@ this.hotobj.viewhotels().subscribe(res=>{
     {
     this.formdata.append('image',this.file,this.file.name);
     this.formdata.append("hotelObj",JSON.stringify(data));
+
     this.hotobj.createhotel(this.formdata).subscribe(
       res=>{
         if(res["message"]=="failed"){

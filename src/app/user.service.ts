@@ -19,4 +19,8 @@ getuser(data:any):Observable<any>{
 loginadmin(data:any):Observable<any>{
   return this.hc.post("admin/checkpasswordasync",data)
 }
+bookhotel(data:any):Observable<any>
+{
+  return this.hc.post("user/bookhotel",data)
+}
 }

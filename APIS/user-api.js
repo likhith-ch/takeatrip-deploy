@@ -1,5 +1,6 @@
 const exp=require("express")
 const User = require("../models/Users.js")
+const Hotel = require("../models/Hotels.js")
 const verifyToken=require('./middlewares/verifytokens')
 //const Product = require("../models/Products.js")
 require("dotenv").config()
@@ -11,6 +12,25 @@ const jsonwebtoken=require("jsonwebtoken")
 const userModel=require("../models/Users.js")
 userapiObj.use(exp.json())
 module.exports=userapiObj
+Date.prototype.addDay = function (days) {
+    let date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+  function getDate(strDate, stpDate) {
+    var dArray = new Array();
+    var cDate = strDate;
+    while (cDate <= stpDate) {
+          
+        // Adding the date to array
+        dArray.push(new Date (cDate).toLocaleString()); 
+          
+        // Increment the date by 1 day
+        cDate = cDate.addDay(1); 
+    }
+    return dArray;
+}
+
 userapiObj.post("/createuser",errHandler(async (req,res)=>{
     let hashedpassword=bcrypt.hashSync(req.body.password,7)
     let userObjtoModel=new User({
@@ -34,6 +54,45 @@ userapiObj.get("/getusers",errHandler(async (req,res)=>{
 userapiObj.get("/getuser/:username",errHandler(async (req,res)=>{
     let userobj= await User.findOne({username:req.params.username})
     res.send({message:userobj})
+}))
+userapiObj.post("/bookhotel",verifyToken,errHandler(async (req,res)=>{
+    let userobj= await User.findOne({username:req.body.username})
+    dobj=req.body
+    checkin=new Date(dobj.checkindate)
+    checkout=new Date(dobj.checkoutdate)
+    let datesarray=getDate(checkin,checkout)
+
+    hotelobj=await Hotel.findOne({hotel_id:dobj.hoteldata["hotel_id"]}) 
+    let bookeddates = hotelobj["daywise_bookings"].map(a => a.date);
+    let bookingsarray=hotelobj["daywise_bookings"]
+    let userbookinghistory=userobj["rooms"]
+    userbookinghistory.push(dobj)
+for(day of datesarray){
+if(bookeddates.includes(day)){
+    
+   let obj = hotelobj["daywise_bookings"].find(obj => obj.date == day);
+   var index = bookingsarray.indexOf(obj);
+    
+if (index !== -1) {
+  bookingsarray.splice(index, 1);
+}
+obj.count=obj.count+parseInt(dobj.rooms)
+bookingsarray.push(obj)
+}
+else{
+bookingsarray.push({date:day,count:parseInt(dobj.rooms)})
+
+}
+    }
+    console.log("booking history")
+    console.log(userbookinghistory)
+await Hotel.updateOne({hotel_id:hotelobj["hotel_id"]},{daywise_bookings:bookingsarray})
+await User.updateOne({username:dobj.username},{rooms:userbookinghistory})
+res.send({message:"hotel booked succesfully"})
+
+
+
+
 }))
 
 
