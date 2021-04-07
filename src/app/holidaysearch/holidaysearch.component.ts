@@ -127,6 +127,23 @@ export class HolidaysearchComponent implements OnInit {
   searchpackages(){
     this.actualfromcity=this.selectedfromcity
     this.actualtocity=this.selectedtocity
+    this.holobj.getcitypackages(this.actualtocity).subscribe(res=>{
+      if(res["message"]=="failed" && res["reason"]=="unauthorized access"){
+        this.localstorage.removeItem()
+        this.toster.info("You should Login to Proceed")
+        this.router.navigateByUrl("/login")
+      
+      }
+      else if(res["message"]=="failed"){
+        this.localstorage.removeItem()
+        this.toster.info("Session expired please login again")
+        this.router.navigateByUrl("/login")
+      }
+      else if(res["message"]=="fetched successfully"){
+        this.foundpackages=res["packagelist"]
+        console.log(this.foundpackages)
+    }
+    })
     
   }
   bookpackage(data:any){

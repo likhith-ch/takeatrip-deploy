@@ -23,4 +23,9 @@ bookhotel(data:any):Observable<any>
 {
   return this.hc.post("user/bookhotel",data)
 }
+bookholiday(data:any):Observable<any>
+{
+  console.log("hello",data)
+  return this.hc.post("user/bookholiday",data)
+}
 }

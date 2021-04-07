@@ -96,6 +96,25 @@ res.send({message:"hotel booked succesfully"})
 }))
 
 
+userapiObj.post("/bookholiday",verifyToken,errHandler(async (req,res)=>{
+    console.log(req.body)
+    let userobj= await User.findOne({username:req.body.username})
+    let bookedpackages=userobj["package"]
+    bookedpackages.push(req.body)
+    await User.updateOne({username:req.body.username},{package:bookedpackages})
+    res.send({message:'package booked succesfully'})
+}))
+
+
+
+
+
+
+
+
+
+
+
 
 
 
