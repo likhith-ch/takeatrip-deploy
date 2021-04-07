@@ -19,6 +19,7 @@ import { BookserviceComponent } from './bookservice/bookservice.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { HolidaysearchComponent } from './holidaysearch/holidaysearch.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { UserbookingsComponent } from './userbookings/userbookings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     HotelsearchComponent,
     BookserviceComponent,
     UserprofileComponent,
-    HolidaysearchComponent
+    HolidaysearchComponent,
+    UserbookingsComponent
   ],
   imports: [
     BrowserModule,

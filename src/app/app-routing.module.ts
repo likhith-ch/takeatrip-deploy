@@ -1,3 +1,4 @@
+import { UserbookingsComponent } from './userbookings/userbookings.component';
 import { HolidaysearchComponent } from './holidaysearch/holidaysearch.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { BookserviceComponent } from './bookservice/bookservice.component';
@@ -23,6 +24,7 @@ const routes: Routes = [{
                         {path:"hotelsearch/:city/:checkindate/:checkoutdate/:roomscount",component:HotelsearchComponent},
                         {path:"bookservice/:servicetype",component:BookserviceComponent},
                         {path:"userprofile",component:UserprofileComponent},
+                        {path:"userbookings",component:UserbookingsComponent},
                         {path:"holidaysearch/:fromcity/:tocity",component:HolidaysearchComponent}];
 
 @NgModule({
