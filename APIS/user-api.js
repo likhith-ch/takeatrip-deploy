@@ -97,12 +97,69 @@ res.send({message:"hotel booked succesfully"})
 
 
 userapiObj.post("/bookholiday",verifyToken,errHandler(async (req,res)=>{
-    console.log(req.body)
     let userobj= await User.findOne({username:req.body.username})
     let bookedpackages=userobj["package"]
     bookedpackages.push(req.body)
     await User.updateOne({username:req.body.username},{package:bookedpackages})
     res.send({message:'package booked succesfully'})
+}))
+
+
+userapiObj.post("/cancelholiday",verifyToken,errHandler(async (req,res)=>{
+    let userobj= await User.findOne({username:req.body.username})
+     bookedpackages=userobj["package"]
+     req.body["totalpackagecost"]=parseInt(req.body["totalpackagecost"])
+     req.body["totalpeople"]=parseInt(req.body["totalpeople"])
+     cancelpack=req.body
+     var index = bookedpackages.indexOf(cancelpack);
+     console.log(req.body)
+     console.log(bookedpackages[0])
+     console.log(index)
+if (index !== -1) {
+    bookedpackages.splice(index, 1);
+}
+    await User.updateOne({username:req.body.username},{package:bookedpackages})
+    res.send({message:'package canceled succesfully',updatedpackage:bookedpackages})
+}))
+
+
+
+
+
+userapiObj.post("/cancelhotel",verifyToken,errHandler(async (req,res)=>{
+    dobj=req.body
+    let userobj= await User.findOne({username:req.body.username})
+    let hotobj=await Hotel.findOne({hotel_id:dobj['hoteldata']['hotel_id']})
+    daywisebookings=hotobj["daywise_bookings"]
+     bookedhotels=userobj["rooms"]
+     checkindate=new Date(req.body.checkindate)
+     checkoutdate=new Date(req.body.checkoutdate)
+     datesarray=getDate(checkindate,checkoutdate)
+     for(date of datesarray){
+        let obj = daywisebookings.find(obj => obj.date == date);
+
+        var index1 = daywisebookings.indexOf(obj);
+    
+        if (index1 !== -1) {
+            daywisebookings.splice(index1, 1);
+        }
+        obj.count=obj.count-parseInt(dobj.rooms)
+        daywisebookings.push(obj)
+    }
+    let index=-1
+    for( hotel of bookedhotels) {
+        if(hotel.checkindate == dobj.checkindate && hotel.checkoutdate == dobj.checkoutdate && hotel["hoteldata"]["hotel_id"]==dobj["hoteldata"]["hotel_id"] && hotel.rooms==dobj.rooms){
+            index = bookedhotels.indexOf(hotel);
+        }
+    }
+console.log(index)
+      if (index !== -1) {
+        bookedhotels.splice(index, 1);
+    }
+    
+    await Hotel.updateOne({hotel_id:dobj['hoteldata']['hotel_id']},{daywise_bookings:daywisebookings})
+    await User.updateOne({username:req.body.username},{rooms:bookedhotels})
+    res.send({message:'rooms canceled succesfully',updatedrooms:bookedhotels})
 }))
 
 

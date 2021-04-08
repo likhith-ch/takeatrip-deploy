@@ -153,6 +153,7 @@ export class HolidaysearchComponent implements OnInit {
     localStorage.setItem("packageduration",data["package_nights"])
     localStorage.setItem("packagecity",data["package_destination_city"])
     localStorage.setItem("packagefeatures",data["package_features"][0])
+    localStorage.setItem("packageurl",data['image'])
     this.router.navigateByUrl("/bookservice/holiday")
   }
 }

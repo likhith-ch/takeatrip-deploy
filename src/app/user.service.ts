@@ -28,4 +28,10 @@ bookholiday(data:any):Observable<any>
   console.log("hello",data)
   return this.hc.post("user/bookholiday",data)
 }
+cancelholiday(data:any):Observable<any>
+{return this.hc.post("user/cancelholiday",data)}
+cancelhotel(data:any):Observable<any>
+{return this.hc.post("user/cancelhotel",data)}
+
 }
+

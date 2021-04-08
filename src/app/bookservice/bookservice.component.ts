@@ -74,6 +74,7 @@ packageobj:any={}
       this.packageobj["package_name"]=this.packagename;this.packageobj["package_cost"]=this.packagecost;
       this.packageobj["package_days"]=this.packagedays;this.packageobj["package_destination_city"]=this.packagecity;
       this.packageobj["package_facilities"]=this.packagefacilities
+      this.packageobj["image"]=localStorage.getItem("packageurl")
       }
   }
   bookhotel(data:any){
