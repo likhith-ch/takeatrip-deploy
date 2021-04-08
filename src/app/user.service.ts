@@ -32,6 +32,9 @@ cancelholiday(data:any):Observable<any>
 {return this.hc.post("user/cancelholiday",data)}
 cancelhotel(data:any):Observable<any>
 {return this.hc.post("user/cancelhotel",data)}
+changepassword(data:any):Observable<any>{
+  return this.hc.post("user/changepassword",data)
+}
 
 }
 

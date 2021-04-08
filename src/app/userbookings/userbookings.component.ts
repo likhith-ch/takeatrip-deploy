@@ -77,8 +77,22 @@ this.servicetype="holiday"
 
   ngOnInit(): void {
 this.userobj.getuser({"username":localStorage.getItem("username")}).subscribe(res=>{
-  this.userdata=res["message"]
-  console.log(this.userdata)
+  if(res["message"]=="failed" && res["reason"]=="unauthorized access"){
+    this.localstorage.removeItem()
+    this.toster.info("You should Login to Proceed")
+    this.router.navigateByUrl("/login")
+  
+  }
+  else if(res["message"]=="failed"){
+    this.localstorage.removeItem()
+    this.toster.info("Session expired please login again")
+    this.router.navigateByUrl("/login")
+  }
+  else{
+    this.userdata=res["message"]
+       }
+  
+  
 })
   }
 

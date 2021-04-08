@@ -1,1 +1,62 @@
-<p>userprofile works!</p>
+<div class="container w-75 bg-white p-3 rounded mt-3">
+<h4>USER PROFILE</h4>
+<div class="row mt-3">
+    <div class="col-md-2 text-primary"><h6>USER NAME</h6></div>
+    <div class="col-md-5" style="color:#ff7f3f"> <h6>{{userdata["username"]}}</h6></div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-2 text-primary"><h6>EMAIL</h6></div>
+    <div class="col-md-5" style="color:#ff7f3f"> <h6>{{userdata["email"]}}</h6></div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-2 text-primary"><h6>PHONE</h6></div>
+    <div class="col-md-5" style="color:#ff7f3f"> <h6>{{userdata["phone"]}}</h6></div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-2 text-primary"><h6>PASSWORD</h6></div>
+    <div class="col-md-5" style="color:#ff7f3f"> <h6 class="password">*******</h6></div>
+    <div class="col-md-3 text-primary"><a class="text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">CHANGE?</a>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form #changepasswordform="ngForm" (ngSubmit)="onSubmit(changepasswordform)">
+                <div class="modal-body">
+                  
+                    <div class="mb-3">
+                      <label for="old-password" class="col-form-label"><span class="text-danger">*</span>Enter Old password:</label>
+                      <input type="password" class="form-control" id="old-password" name="oldpassword" #oldpassword="ngModel" ngModel required>  
+                    </div>
+                    <div *ngIf="oldpassword.touched && !oldpassword.valid || (isvalid==0 && !oldpassword?.valid)" class="text-danger">
+                        Please enter Old password. 
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-password" class="col-form-label"><span class="text-danger">*</span>Enter New password:</label>
+                        <input type="password" class="form-control" id="new-password" name="newpassword" #newpassword="ngModel" ngModel required minlength="6" pattern='^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[A-Za-z0-9_@.!/#&+-]*$'>  
+                      </div>
+                      <div *ngIf="newpassword.touched && !newpassword.valid || (isvalid==0 && !newpassword?.valid)" class="text-danger">
+                        Please enter Atleast  1 Number and minimum length of 6. 
+                    </div>
+                      <div class="mb-3">
+                        <label for="reenter-password" class="col-form-label"><span class="text-danger">*</span>Re-Enter New password:</label>
+                        <input type="text" class="form-control" id="reenter-password" name="reenterpassword" #reenterpassword="ngModel" ngModel required minlength="6" pattern='^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[A-Za-z0-9_@.!/#&+-]*$'>  
+                      </div>
+                      <div *ngIf="(newpassword.touched && newpassword.touched && changepasswordform.value.newpassword!=changepasswordform.value.reenterpassword)" class="text-danger">
+                        Passwords did not match. 
+                    </div>
+                    
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" value="Submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </form>
+              </div>
+            </div>
+          </div></div>
+</div>
+</div>

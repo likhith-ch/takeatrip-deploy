@@ -51,7 +51,7 @@ userapiObj.get("/getusers",errHandler(async (req,res)=>{
     let userarray= await User.find()
     res.send({message:userarray})
 }))
-userapiObj.get("/getuser/:username",errHandler(async (req,res)=>{
+userapiObj.get("/getuser/:username",verifyToken,errHandler(async (req,res)=>{
     let userobj= await User.findOne({username:req.params.username})
     res.send({message:userobj})
 }))
@@ -163,6 +163,26 @@ console.log(index)
 }))
 
 
+
+userapiObj.post("/changepassword",verifyToken,errHandler(async (req,res)=>{
+    let userObj=await User.findOne({username:req.body.username})
+    dobj=req.body
+    if(!userObj){
+        res.send({message:"invalid username"})
+    }
+    else if(!userObj || !bcrypt.compareSync(dobj.oldpassword,userObj.password)){
+        
+        res.send({message:"invalid old password"})
+    }
+    else{
+        
+        let hashedpassword=bcrypt.hashSync(dobj.newpassword,7)
+        await User.updateOne({username:dobj.username},{password:hashedpassword})
+        res.send({message:"password changed successfully"})
+
+    }
+
+}))
 
 
 
