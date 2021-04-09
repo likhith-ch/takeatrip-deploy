@@ -14,6 +14,7 @@ userdata:any
 holidaybtncolor="linear-gradient(to right,#f0772c,#f95776)"
 hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 servicetype="holiday"
+today=new Date();
   constructor(private router:Router,private activatedRoute: ActivatedRoute,private userobj:UserService,private toster:ToastrService,private localstorage:LocalstorageService) { 
 
   }
@@ -94,6 +95,9 @@ this.userobj.getuser({"username":localStorage.getItem("username")}).subscribe(re
   
   
 })
+  }
+  checkdate(data:any){
+    return new Date(data);
   }
 
 }

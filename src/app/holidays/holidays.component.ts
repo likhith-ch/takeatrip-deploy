@@ -15,7 +15,7 @@ export class HolidaysComponent implements OnInit {
   selectedfromcity:any="";
   selectedtocity:any="";
   fromcity=["Hyderabad","Chennai","Vijayawada","Vishakapatnam","Agra","Eluru","Coimbatore","karimnagar"]
-  tocity=["Hyderabad","Chennai","Vijayawada","Vishakapatnam","Agra","Eluru","Coimbatore","karimnagar","Goa"]
+  tocity=["Hyderabad","Chennai","Banglore","Vijayawada","Kochi","Goa","Mumbai","kolkata","Delhi"]
 
   ngOnInit(): void {
   }

@@ -25,7 +25,10 @@
                 <div class="col-md-2 bg-light text-center">
                   <h5 class="card-text" style="padding-top:30%"><i class="fa fa-rupee" >{{package["totalpackagecost"]}}</i></h5>
                   <p class="small">Total price paid</p>
+                  <div *ngIf="checkdate(package['tripstartdate'])>today">
                   <a  class="btn btn-danger" (click)="cancelpackage(package)">Cancel</a>
+                  </div>
+                  <div *ngIf="checkdate(package['tripstartdate'])<=today"><small>Happy Holidays!</small></div>
                 </div>
                 </div>
               </div>
@@ -52,7 +55,9 @@
                 <div class="col-md-2 bg-light text-center">
                   <h5 class="card-text" style="padding-top:30%"><i class="fa fa-rupee" >{{room["totalprice"]}}</i></h5>
                   <p class="small">Total price paid</p>
-                  <a  class="btn btn-danger" (click)="cancelhotel(room)">Cancel</a>
+                  <div *ngIf="checkdate(room['checkindate'])>today">
+                  <a  class="btn btn-danger" (click)="cancelhotel(room)">Cancel</a></div>
+                  <div *ngIf="checkdate(room['checkindate'])<=today">Happy Stay!</div>
                 </div>
                 </div>
               </div>

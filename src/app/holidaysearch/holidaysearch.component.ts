@@ -17,7 +17,7 @@ export class HolidaysearchComponent implements OnInit {
   foundpackages=[];
   constructor(private router:Router,private activatedRoute: ActivatedRoute,private toster:ToastrService,private holobj:HolidaysService,private localstorage:LocalstorageService) { }
   fromcity=["Hyderabad","Chennai","Vijayawada","Vishakapatnam","Agra","Eluru","Coimbatore","karimnagar"]
-  tocity=["Hyderabad","Chennai","Vijayawada","Vishakapatnam","Agra","Eluru","Coimbatore","karimnagar","Goa"]
+  tocity=["Hyderabad","Chennai","Banglore","Vijayawada","Kochi","Goa","Mumbai","kolkata","Delhi"]
   budgetminValue: number = 1000;
   budgetmaxValue: number = 50000;
   budgetoptions: Options = {

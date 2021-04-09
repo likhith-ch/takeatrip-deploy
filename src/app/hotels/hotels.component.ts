@@ -21,8 +21,7 @@ todaydate = formatDate(new Date(),'yyyy-MM-dd','en_US');
  ngOnInit():any{
   console.log(this.selectedcity)
  }
-cities=["Hyderabad","Chennai","Vijayawada","Vishakapatnam","Goa"
-]
+cities=["Hyderabad","Chennai","Banglore","Vijayawada","Kochi","Goa","Mumbai","kolkata","Delhi"]
 
   onchange(){
     console.log(this.selectedcity)

@@ -19,7 +19,7 @@ adminapiObj.post("/checkpasswordasync",errHandler(async (req,res)=>{
 
     else if(!userFromDb || (dobj.password!=userFromDb.password))
     {
-    res.send(false)
+    res.send({message:"invalid credentials"})
     }
     else{
         

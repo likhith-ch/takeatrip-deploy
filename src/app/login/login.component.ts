@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { LocalstorageService } from './../localstorage.service';
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 userbtncolor="linear-gradient(to right,#f0772c,#f95776)"
 adminbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
 usertype="user"
-  constructor(private userobj:UserService,private router:Router,private local:LocalstorageService) { }
+  constructor(private userobj:UserService,private router:Router,private local:LocalstorageService,private toster:ToastrService) { }
   changeusertype(data:any){
     if(data=="admin")
     {
@@ -38,8 +39,12 @@ this.usertype="user"
               this.router.navigateByUrl("/login")
     
             }
-            if(res["message"]=="invalid username"){alert("invalid username");
+            if(res["message"]=="invalid username"){
+              this.toster.error("User name does not exists.")
             this.router.navigateByUrl("/login");
+           }
+           if(res["message"]=='invalid credentials'){
+            this.toster.error("Invalid credentials")
            }
            if(res["message"]=="login success"){
             this.router.navigateByUrl("/");
@@ -52,8 +57,12 @@ this.usertype="user"
           }
           if(this.usertype=="admin"){
             this.userobj.loginadmin(data.value).subscribe(res=>{
-              if(res["message"]=="invalid username"){alert("invalid username");
+              if(res["message"]=="invalid Admin username"){
+                this.toster.error("User name does not exists");
               this.router.navigateByUrl("/login");
+             }
+             if(res["message"]=='invalid credentials'){
+               this.toster.error("Invalid credentials")
              }
              if(res["message"]=="login success"){
               this.router.navigateByUrl("/admin");

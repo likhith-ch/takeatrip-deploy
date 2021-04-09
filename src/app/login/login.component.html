@@ -12,7 +12,7 @@
             <form #userloginForm="ngForm" (ngSubmit)="onSubmit(userloginForm)" class="mt-3 ">
                 <div class="container w-75 form-group mt-5">
                    <input   type="text" id="username"  #username="ngModel" name='username' placeholder=" User Name"  required minlength="6" class="form-control" ngModel/>
-                   <div *ngIf="username.touched && !username.valid || (isuservalid==0 && !username?.valid) " class="text-danger">
+                   <div *ngIf="(isuservalid==0 && !username?.valid) " class="text-danger">
                      Please enter User Name 
                  </div>
                   </div>
@@ -20,8 +20,8 @@
             
                 <div class="container w-75 form-group mt-3">
                     <input   type="password" id="password"  #password="ngModel" name='password'  required  minlength="6" pattern='^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[A-Za-z0-9_@.!/#&+-]*$' placeholder="Password" class="form-control" ngModel/>
-                    <div *ngIf="password.touched && !password.valid || (isuservalid==0 && !password?.valid)" class="text-danger">
-                     Your password consists Atleast  1 Number and minimum length of 6. 
+                    <div *ngIf="(isuservalid==0 && !password?.valid)" class="text-danger">
+                     Please Enter password 
                  </div>
                   </div>
             
@@ -43,7 +43,7 @@
             <form #adminloginForm="ngForm" (ngSubmit)="onSubmit(adminloginForm)" class="mt-3 ">
                 <div class="container w-75 form-group mt-5">
                    <input   type="text" id="adminname"  #adminname="ngModel" name='adminname' placeholder="Admin User Name"  required minlength="6" class="form-control" ngModel/>
-                   <div *ngIf="adminname.touched && !adminname.valid || (isadminvalid==0 && !adminname?.valid) " class="text-danger">
+                   <div *ngIf="(isadminvalid==0 && !adminname?.valid) " class="text-danger">
                      Please enter User Name 
                  </div>
                   </div>
@@ -51,8 +51,8 @@
             
                 <div class="container w-75 form-group mt-3">
                     <input   type="password" id="password"  #password="ngModel" name='password'  required  minlength="6" pattern='^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[A-Za-z0-9_@.!/#&+-]*$' placeholder=" Admin Password" class="form-control" ngModel/>
-                    <div *ngIf="password.touched && !password.valid || (isadminvalid==0 && !password?.valid)" class="text-danger">
-                     Your password consists Atleast  1 Number and minimum length of 6. 
+                    <div *ngIf="(isadminvalid==0 && !password?.valid)" class="text-danger">
+                     Please enter password.
                  </div>
                   </div>
             

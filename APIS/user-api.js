@@ -204,7 +204,7 @@ userapiObj.post("/checkpasswordasync",errHandler(async (req,res)=>{
 
     else if(!userFromDb || !bcrypt.compareSync(dobj.password,userFromDb.password))
     {
-    res.send(false)
+    res.send({message:"invalid credentials"})
     }
     else{
         let signedToken= await jsonwebtoken.sign({username:userFromDb.username},process.env.SECRET,{expiresIn:1000})

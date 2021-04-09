@@ -112,7 +112,7 @@ this.tripenddate = new Date(new Date(this.packagestartdate).getTime()+(parseInt(
   }
 
   bookholiday(data:any){
-    if(!data.form.invalid && this.startdatetostring!=undefined){
+    if(!data.form.invalid && this.startdatetostring!=undefined && new Date(this.packagestartdate)>new Date() ){
     this.userobj.bookholiday({'username':localStorage.getItem("username"),'packageobj':this.packageobj,'totalpeople':this.packageheadcount,'tripstartdate':this.startdatetostring,'tripenddate':this.tripenddate,'totalpackagecost':this.finalpackagecost}).subscribe(
       res=>{
         if(res["message"]=="failed" && res["reason"]=="unauthorized access"){
@@ -134,6 +134,7 @@ this.tripenddate = new Date(new Date(this.packagestartdate).getTime()+(parseInt(
   }
     else if(data.form.invalid){this.toster.error("Unable to process payement.")}
     else if(this.startdatetostring==undefined){this.toster.warning("Please select trip start date.")}
+    else if(new Date(this.packagestartdate)<=new Date()){this.toster.warning("You can only book packages for future.")}
 
   
   }
