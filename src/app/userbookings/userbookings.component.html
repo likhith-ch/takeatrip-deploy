@@ -53,7 +53,7 @@
                   <p class="pt-1 text-primary">Number of rooms: {{room["rooms"]}}</p>
                 </div> 
                 <div class="col-md-2 bg-light text-center">
-                  <h5 class="card-text" style="padding-top:30%"><i class="fa fa-rupee" >{{room["totalprice"]}}</i></h5>
+                  <h5 class="card-text" style="padding-top:30%"><i class="fa fa-rupee" style="font-size-adjust:20px" >{{room["totalprice"]}}</i></h5>
                   <p class="small">Total price paid</p>
                   <div *ngIf="checkdate(room['checkindate'])>today">
                   <a  class="btn btn-danger" (click)="cancelhotel(room)">Cancel</a></div>

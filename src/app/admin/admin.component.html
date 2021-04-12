@@ -175,9 +175,9 @@
 <!--Display holiday packages if admin selects-->
 <div *ngIf="actiontype=='view' && servicetype=='holiday'">
 <div class="container text-center text-white" *ngIf="packlen==0"><h4>No Holiday packages to display</h4></div>
-<div class="container d-md-flex flex-wrap flex-row justify-content-center" *ngIf="packlen!=0">
+<div class="container d-md-flex flex-wrap  flex-row justify-content-center" *ngIf="packlen!=0">
         <div *ngFor='let package of packageitems'>
-          <div class="card mt-3 text-center mr-2" style='width: 15rem;'>
+          <div class="card mt-3 text-center mr-2 card-deck" style='width: 15rem;'>
               <img [src]="package.image" class="imgcenter card-img-top" style="width:100%;height:200px">
               <div class="card-body">
                 <h5 class="card-title">{{package.package_name}}</h5>

@@ -4,6 +4,7 @@
   min-height: 100vh;
   background-size: cover;
     width: 100%;
+  font-family: 'Balsamiq Sans', cursive;
 }
 .tracking-in-expand{animation:tracking-in-expand .7s cubic-bezier(.215,.61,.355,1.000) both}
 .color-change-2x{animation:color-change-2x 2s linear infinite alternate both}

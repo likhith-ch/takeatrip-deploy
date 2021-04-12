@@ -31,6 +31,10 @@ hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem("usertype")!='admin')
+    {this.toastr.error("unauthorized access")
+  this.router.navigateByUrl("/hotels")}
+  else{
     this.packobj.viewpackages().subscribe(res=>{
       if(res["message"]=="failed"){
         this.toastr.error(res["reason"])
@@ -50,6 +54,7 @@ hotelbtncolor="linear-gradient(to right,rgb(110, 168, 223),#1885f1)"
       this.hotelitems=res["message"]
       this.hotlen=this.hotelitems.length
     })
+  }
   }
   ngOnDestroy():void{
   }

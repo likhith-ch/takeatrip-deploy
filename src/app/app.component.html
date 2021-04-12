@@ -3,7 +3,7 @@
 <div id="header" *ngIf="scrolled == 0" >
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex flex-row justify-content-between">
-<div class="mt-2"><a class="navbar-brand " href="#"><img src="../../assets/logos/logowhite.png"  height="40px"/></a></div>
+<div class="mt-2"><a class="navbar-brand " href="#"><img src="../../assets/logos/logo_white.png"  height="40px"/></a></div>
 <div class="mt-2" *ngIf="isloggedin=='removed'"><a class="navbar-brand" routerLink="login"><button class="btn px-4 text-white" style="background-image:linear-gradient(to right,rgb(110, 168, 223),#1885f1);border-radius: 25px;">Login or create Account</button></a></div>
 <div class="mt-2" *ngIf="isloggedin=='added'">
   <div class="container-fluid d-flex flex-row justify-content-center align-items-baseline">
@@ -35,7 +35,7 @@
 <div id="header2" *ngIf="scrolled == 1">
     <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img src="../../assets/logos/logoblue.png"  height="40px"/></a>
+          <a class="navbar-brand" href="#"><img src="../../assets/logos/logo_blue.png"  height="40px"/></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -79,7 +79,7 @@
   <div id="header3" class="d-block d-md-none">
     <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img src="../../assets/logos/logoblue.png"  height="40px"/></a>
+          <a class="navbar-brand" href="#"><img src="../../assets/logos/logo_blue.png"  height="40px"/></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -99,9 +99,9 @@
         </div>
       </nav>
       <div class="container-fluid d-flex flex-row justify-content-end  mt-5">
-        <div class="text-center mr-1 pt-4"><p class="text-white" *ngIf="loggeduser!=''">
+        <div class="text-center mr-1 pt-4"><p class="text-white" *ngIf="loggeduser!='' && isloggedin=='added'">
           <div class="dropdown">
-            <a class="text-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+            <a class="text-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;" *ngIf="loggeduser!='' && isloggedin=='added'">
               Hello,  {{loggeduser}}
             </a>
           

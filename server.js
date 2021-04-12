@@ -9,7 +9,7 @@ const userApiObj=require("./APIS/user-api")
 const hotelsApiObj=require("./APIS/hotels-api")
 const holidayApiObj=require("./APIS/holiday-api")
 const adminApiObj=require("./APIS/admin-api")
-const port=process.env.PORT
+const port=process.env.PORT||8080
 app.use("/user",userApiObj)
 app.use("/hotels",hotelsApiObj)
 app.use("/holiday",holidayApiObj)
